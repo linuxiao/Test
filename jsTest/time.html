@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<!--<meta http-equiv="refresh" content="1" />-->
+	<title>Document</title>
+<style type="text/css">
+body{
+	background:pink;
+}
+
+</style>
+
+<script>   
+function getDate(){   
+var date=new Date();   
+var month=date.getMonth()+1;   
+var day=date.getDate();   
+  
+if(month.toString().length == 1){  
+//或者用if (eval(month) <10){month="0"+month}     
+	month='0'+month;   
+}   
+if(day.toString().length == 1){   
+	day='0'+day;   
+}   
+
+var time=date.toLocaleString().substring(date.toLocaleString().length-10)
+var times=date.toLocaleString().substring(date.toLocaleString().length-8)
+var re=""
+
+var imgl="<img src=\'"
+var imgr="\' alt=\'\'/>"
+var strs= new Array(); //定义一数组 
+strs=times.split(""); //字符分割 
+for (i=0;i<strs.length ;i++ ) 
+{ 
+	if (strs[i]>=0&&strs[i]<=9) {
+		imgsrc="0-9/"+strs[i]+".gif";//拼接图片路径
+		re+=imgl+imgsrc+imgr;//拼接img标签
+	}else{
+		re+="&nbsp;&nbsp;&nbsp;"+strs[i]+"&nbsp;&nbsp;&nbsp;"; 
+	}
+} 
+//return date.getYear()+'/'+month+'/'+day+'  '+re+'  '+'星期'+'日一二三四五六'.charAt(date.getDay());   
+return re; 
+}   
+</script>   
+
+</head>   
+<body>   
+
+<script type="text/javascript">
+/*
+var date=new Date()
+var times=date.toLocaleString().substring(date.toLocaleString().length-8)
+var imgl="<img src=\'"
+var imgr="\' alt=\'\'/>"
+var strs= new Array(); //定义一数组 
+strs=times.split(""); //字符分割 
+for (i=0;i<strs.length ;i++ ) 
+{ 
+	if (strs[i]>=0&&strs[i]<=9) {
+		imgsrc="0-9/"+strs[i]+".gif";
+		img=imgl+imgsrc+imgr;
+		document.write(img); //分割后的字符输出 
+	}else{
+		document.write(strs[i]); //分割后的字符输出 
+	}
+} 
+*/
+
+</script>
+
+<br/>
+
+<div id="time">   
+<script>   
+document.getElementById('time').innerHTML=getDate();   
+setInterval("document.getElementById('time').innerHTML=getDate();",1000);   
+</script>    
+</div>     
+
+</body>    
+</html>
