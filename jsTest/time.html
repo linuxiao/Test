@@ -8,78 +8,38 @@
 body{
 	background:pink;
 }
-
+#hidden{
+	display:none;
+}
 </style>
-
-<script>   
-function getDate(){   
-var date=new Date();   
-var month=date.getMonth()+1;   
-var day=date.getDate();   
-  
-if(month.toString().length == 1){  
-//或者用if (eval(month) <10){month="0"+month}     
-	month='0'+month;   
-}   
-if(day.toString().length == 1){   
-	day='0'+day;   
-}   
-
-var time=date.toLocaleString().substring(date.toLocaleString().length-10)
-var times=date.toLocaleString().substring(date.toLocaleString().length-8)
-var re=""
-
-var imgl="<img src=\'"
-var imgr="\' alt=\'\'/>"
-var strs= new Array(); //定义一数组 
-strs=times.split(""); //字符分割 
-for (i=0;i<strs.length ;i++ ) 
+<script>
+function getDate(){
+var date=new Date();//实例化时间类
+var times=date.toLocaleString().substring(12);//截取时间字符串
+var re="";//初始化标签
+var imgl="<img src=\'";//拼接img标签左边
+var imgr="\' alt=\'\'/>";//拼接img标签右边
+var strs= new Array(); //定义一数组
+strs=times.split(""); //将时间字符串分割到数组里面
+for (i=0;i<strs.length ;i++ )//判断该数组中元素
 { 
-	if (strs[i]>=0&&strs[i]<=9) {
+	if (strs[i]>=0&&strs[i]<=9) {//如果是0-9的数字
 		imgsrc="0-9/"+strs[i]+".gif";//拼接图片路径
 		re+=imgl+imgsrc+imgr;//拼接img标签
 	}else{
-		re+="&nbsp;&nbsp;&nbsp;"+strs[i]+"&nbsp;&nbsp;&nbsp;"; 
+		re+="&nbsp;&nbsp;&nbsp;"+strs[i]+"&nbsp;&nbsp;&nbsp;";//否则原样输出
 	}
-} 
-//return date.getYear()+'/'+month+'/'+day+'  '+re+'  '+'星期'+'日一二三四五六'.charAt(date.getDay());   
-return re; 
-}   
-</script>   
-
-</head>   
-<body>   
-
-<script type="text/javascript">
-/*
-var date=new Date()
-var times=date.toLocaleString().substring(date.toLocaleString().length-8)
-var imgl="<img src=\'"
-var imgr="\' alt=\'\'/>"
-var strs= new Array(); //定义一数组 
-strs=times.split(""); //字符分割 
-for (i=0;i<strs.length ;i++ ) 
-{ 
-	if (strs[i]>=0&&strs[i]<=9) {
-		imgsrc="0-9/"+strs[i]+".gif";
-		img=imgl+imgsrc+imgr;
-		document.write(img); //分割后的字符输出 
-	}else{
-		document.write(strs[i]); //分割后的字符输出 
-	}
-} 
-*/
-
+}
+document.getElementById('time').innerHTML=re;//将拼好的标签装到div里
+}
 </script>
+</head>
+<body onload="getDate()">
+<div id="hidden"><img src="0-9/0.gif"/><img src="0-9/1.gif"/><img src="0-9/2.gif"/><img src="0-9/3.gif"/><img src="0-9/4.gif"/><img src="0-9/5.gif"/><img src="0-9/6.gif"/><img src="0-9/7.gif"/><img src="0-9/8.gif"/><img src="0-9/9.gif"/></div>
 
-<br/>
-
-<div id="time">   
-<script>   
-document.getElementById('time').innerHTML=getDate();   
-setInterval("document.getElementById('time').innerHTML=getDate();",1000);   
-</script>    
-</div>     
-
+<div id="time"></div>
+<script>
+setInterval("getDate()",1000);
+</script>
 </body>    
 </html>
