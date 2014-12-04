@@ -15,13 +15,14 @@ body{
 <script>
 function getDate(){
 var date=new Date();//实例化时间类
-var times=date.toLocaleString().substring(12);//截取时间字符串
+var times=date.toString().substring(16,24);//截取时间字符串
+//var times=date.toLocaleString().substring(12);本地时间格式，12小时制
 var re="";//初始化标签
 var imgl="<img src=\'";//拼接img标签左边
 var imgr="\' alt=\'\'/>";//拼接img标签右边
 var strs= new Array(); //定义一数组
 strs=times.split(""); //将时间字符串分割到数组里面
-for (i=0;i<strs.length ;i++ )//判断该数组中元素
+for (i=0;i<strs.length ;i++ )//循环挨个判断该数组中元素
 { 
 	if (strs[i]>=0&&strs[i]<=9) {//如果是0-9的数字
 		imgsrc="0-9/"+strs[i]+".gif";//拼接图片路径
